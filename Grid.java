@@ -36,7 +36,31 @@ public class Grid {
 			}
 			System.out.println();
 		}
-
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public int getCol() {
+		return col;
+	}
+	
+	public int[] getIndAbove(int i) {
+		return correctPos(i-1, row);
+	}
+	public int[] getIndRightOf(int i) {
+		return correctPos(i+1, col);
+	}
+	public int[] getIndBelow(int i) {
+		return correctPos(i+1, row);
+	}
+	public int[] getIndLeftOf(int i) {
+		return correctPos(i-1, col);
+	}
+	
+	private int[] correctPos(int i, int lim) {
+		return (i + lim) % lim;
 	}
 
 }
