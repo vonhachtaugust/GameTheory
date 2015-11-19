@@ -64,4 +64,8 @@ public class Grid {
 	private int correctPos(int i, int lim) {
 		return (i + lim) % lim;
 	}
+	
+	public void updateLattice(Object[][] lattice) {
+		grid = lattice;
+	}
 }
