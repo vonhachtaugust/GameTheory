@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -13,8 +14,13 @@ public class PrisonersDilemma extends JFrame {
 
 	final int width = 400; // Size of paint area
 	final int height = 400;
+	final int N = 1;
 	public static final int row = 2;
 	public static final int col = 2;
+
+	public Grid grid = new Grid(row, col);
+	public CompetitionStep step = new CompetitionStep(row, col, N);
+	public Random rand = new Random();
 
 	public static void main(String[] args) {
 		new PrisonersDilemma().program();
@@ -22,8 +28,39 @@ public class PrisonersDilemma extends JFrame {
 
 	void program() {
 
-		Grid grid = new Grid(row, col);
-		grid.getPlayers(grid.addPlayers(row, col));
+		// Initialise
+		Object[][] lattice = grid.getPlayers();
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) lattice[i][j];
+				System.out.print(p.getScore() + " ");
+			}
+			System.out.println();
+		}
+
+		// Competitions step
+		step.updatescores(step.getScores(grid), grid);
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) lattice[i][j];
+				p.setState(rand.nextInt(8));
+				System.out.print(p.getScore() + " ");
+			}
+			System.out.println();
+		}
+
+		// Reproduction step
+		step.updatescores(step.getScores(grid), grid);
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) lattice[i][j];
+				System.out.print(p.getScore() + " ");
+			}
+			System.out.println();
+		}
 
 		// initGraphics();
 

@@ -20,15 +20,19 @@ public class TestLogicOperations {
 	public static double R = 1;
 	public static double P = 0.5;
 	public static double S = 0;
-	public static final int row = 4;
-	public static final int col = 4;
+	public static final int row = 2;
+	public static final int col = 2;
 	public static Object[][] lattice;
 	public static Double[][] scores;
 	final static Random rand = new Random();
 
+	public Grid grid = new Grid(row, col);
+
 	public static void main(String[] args) {
 
-		updatescores(scores(grid()), grid());
+		System.out.println((-9 + 8) % 8);
+
+		// updatescores(scores(grid()), grid());
 	}
 
 	// Method generates matrix containing objects, in this case Players.
@@ -45,23 +49,21 @@ public class TestLogicOperations {
 	}
 
 	// Method that given the Object matrix evaluates the scores.
-	public static Double[][] scores(Object[][] grid) {
+	public static Double[][] scores(Grid grid) {
 		scores = new Double[row][col];
 
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-			
+
 				Player p = (Player) lattice[i][j];
-				
+
 				int up = grid.getIndAbove(i);
 				int down = grid.getIndBelow(i);
 				int right = grid.getIndRightOf(j);
 				int left = grid.getIndLeftOf(j);
-				
-				scores[i][j] = (game(p, (Player) lattice[up][j], N) 
-								+ game(p, (Player) lattice[down][j], N)
-								+ game(p, (Player) lattice[i][right], N) 
-								+ game(p, (Player) lattice[i][left], N));
+
+				scores[i][j] = (game(p, (Player) lattice[up][j], N) + game(p, (Player) lattice[down][j], N)
+						+ game(p, (Player) lattice[i][right], N) + game(p, (Player) lattice[i][left], N));
 				System.out.print("(" + scores[i][j] + ")" + " ");
 				System.out.println(p.getScore() + " ");
 			}
