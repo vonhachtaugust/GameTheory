@@ -13,6 +13,7 @@ public class Grid {
 		this.row = row;
 		this.col = col;
 		grid = new Object[row][col];
+		addPlayer(row,col);
 	}
 
 	public static Object[][] addPlayers(int row, int col) {
