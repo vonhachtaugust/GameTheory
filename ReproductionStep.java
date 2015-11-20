@@ -6,21 +6,43 @@ public class ReproductionStep {
 
 	public Grid newGrid;
 	private double mutrate;
+	private int N;
+	private int row;
+	private int col;
 
-	public ReproductionStep(double mutrate) {
+	private ArrayList<Player> neighbours = new ArrayList<Player>();
+	private Integer[][] updateLattice;
+
+	public ReproductionStep(double mutrate, int row, int col, int N) {
 		this.mutrate = mutrate;
+		this.row = row;
+		this.col = col;
+		this.N = N;
+		updateLattice = new Integer[row][col];
 	}
 
 	public Grid getReproduction(Grid grid) {
-		return updateLattice(grid);
+		return changeStates(updateLattice(grid), grid);
 	}
 
-	public Grid updateLattice(Grid origGrid) {
-		int row = origGrid.getRow();
-		int col = origGrid.getCol();
+	public Grid changeStates(Integer[][] lattice, Grid grid) {
+
+		Object[][] toupdate = grid.getPlayers();
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) toupdate[i][j];
+				p.setState(lattice[i][j]);
+			}
+		}
+		return grid;
+	}
+
+	public Integer[][] updateLattice(Grid origGrid) {
+		// int row = origGrid.getRow();
+		// int col = origGrid.getCol();
 
 		Object[][] origLattice = origGrid.getPlayers();
-		Object[][] newLattice = origLattice.clone();
+		// Object[][] newLattice = origLattice.clone();
 
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
@@ -34,7 +56,8 @@ public class ReproductionStep {
 				double bestScore = p.getScore();
 
 				// Place the neighbours, Player objects, in a list
-				ArrayList<Player> neighbours = new ArrayList<Player>();
+				// ArrayList<Player> neighbours = new ArrayList<Player>();
+				neighbours.clear();
 
 				// Neighbour above
 				int up = origGrid.getIndAbove(i);
@@ -57,25 +80,34 @@ public class ReproductionStep {
 				neighbours.add(leftPlayer);
 
 				// Check for highest score and update bestStrat
-				System.out.println("Updating player " + i + ":" + j + " with strat " + bestStrat + " with score " + bestScore);
+				// System.out.println(
+				// "Updating player " + i + ":" + j + " with strat " + bestStrat
+				// + " with score " + bestScore);
 				for (int n = 0; n < neighbours.size(); n++) {
 					Player thisPlayer = neighbours.get(n);
-					System.out.println("Comparing with " + thisPlayer.getState() + " with score " + thisPlayer.getScore());;
+					// System.out.println(
+					// "Comparing with " + thisPlayer.getState() + " with score
+					// " + thisPlayer.getScore());
+					// ;
 					if (thisPlayer.getScore() > bestScore) {
-						System.out.println("was better, updating");
+						// System.out.println("was better, updating");
 						bestStrat = thisPlayer.getState();
 						bestScore = thisPlayer.getScore();
 					}
-					System.out.println();
+					// System.out.println();
 				}
-				System.out.println("RESULT: bestStrat " + bestStrat + " with score " + bestScore);
+				// System.out.println("RESULT: bestStrat " + bestStrat + " with
+				// score " + bestScore);
 
-				Player newP = (Player) newLattice[i][j];
-				newP.setState(bestStrat);
+				updateLattice[i][j] = bestStrat;
+				// Player newP = (Player) newLattice[i][j];
+				// newP.setState(bestStrat); Cannot change state inside the
+				// loop!
+
 			}
 		}
-
-		origGrid.updateLattice(newLattice);
-		return origGrid;
+		// origGrid.updateLattice(newLattice);
+		// return origGrid;
+		return updateLattice;
 	}
 }

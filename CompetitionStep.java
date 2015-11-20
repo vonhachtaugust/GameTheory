@@ -7,7 +7,7 @@ public class CompetitionStep {
 	private static int col;
 	public static Double[][] score;
 
-	public static double T = 2;
+	public static double T = 1.5;
 	public static double R = 1;
 	public static double P = 0.5;
 	public static double S = 0;

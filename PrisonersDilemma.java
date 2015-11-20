@@ -15,13 +15,13 @@ public class PrisonersDilemma extends JFrame {
 	final int width = 400; // Size of paint area
 	final int height = 400;
 	final int N = 7;
-	public static final int row = 4;
-	public static final int col = 4;
+	public static final int row = 32;
+	public static final int col = 32;
 	public static final double mutrate = 0.01;
 
 	public Grid grid = new Grid(row, col);
 	public CompetitionStep step1 = new CompetitionStep(row, col, N);
-	public ReproductionStep step2 = new ReproductionStep(mutrate);
+	public ReproductionStep step2 = new ReproductionStep(mutrate, row, col, N);
 
 	public Random rand = new Random();
 
@@ -34,7 +34,7 @@ public class PrisonersDilemma extends JFrame {
 		// Initialise
 		Object[][] lattice = grid.getPlayers();
 
-		for (int z = 0; z < 2; z++) {
+		for (int z = 0; z < 100; z++) {
 			// Competitions step
 			System.out.println();
 			System.out.println("Competition: ");
