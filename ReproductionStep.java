@@ -7,6 +7,7 @@ public class ReproductionStep {
 	public Grid newGrid;
 	private double mutrate;
 	private int N;
+<<<<<<< Updated upstream
 	private int row;
 	private int col;
 
@@ -19,6 +20,13 @@ public class ReproductionStep {
 		this.col = col;
 		this.N = N;
 		updateLattice = new Integer[row][col];
+=======
+	private Random rand = new Random();
+
+	public ReproductionStep(double mutrate,int N) {
+		this.mutrate = mutrate;
+		this.N = N;
+>>>>>>> Stashed changes
 	}
 
 	public Grid getReproduction(Grid grid) {
@@ -50,6 +58,7 @@ public class ReproductionStep {
 				// Current player
 				Player p = (Player) origLattice[i][j];
 				double myScore = p.getScore();
+				int newStrat;
 
 				// Best strategy so far
 				int bestStrat = p.getState();
@@ -96,14 +105,19 @@ public class ReproductionStep {
 					}
 					// System.out.println();
 				}
+				
 				// System.out.println("RESULT: bestStrat " + bestStrat + " with
 				// score " + bestScore);
-
+				
+				// Mutation
+				if (Math.random() < mutrate) {
+					bestStrat = rand.nextInt(N);
+				}
+				
 				updateLattice[i][j] = bestStrat;
 				// Player newP = (Player) newLattice[i][j];
 				// newP.setState(bestStrat); Cannot change state inside the
 				// loop!
-
 			}
 		}
 		// origGrid.updateLattice(newLattice);
