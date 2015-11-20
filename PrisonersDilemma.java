@@ -14,9 +14,9 @@ public class PrisonersDilemma extends JFrame {
 
 	final int width = 400; // Size of paint area
 	final int height = 400;
-	final int N = 1;
+	final int N = 7;
 	public static final int row = 4;
-	public static final int col = 5;
+	public static final int col = 4;
 	public static final double mutrate = 0.01;
 
 	public Grid grid = new Grid(row, col);
@@ -34,7 +34,7 @@ public class PrisonersDilemma extends JFrame {
 		// Initialise
 		Object[][] lattice = grid.getPlayers();
 
-		for (int z = 0; z < 20; z++) {
+		for (int z = 0; z < 2; z++) {
 			// Competitions step
 			System.out.println();
 			System.out.println("Competition: ");
@@ -57,7 +57,7 @@ public class PrisonersDilemma extends JFrame {
 			for (int i = 0; i < row; i++) {
 				for (int j = 0; j < col; j++) {
 					Player p = (Player) lattice[i][j];
-					System.out.print(p.getState() + "[" + p.getScore() + "]\t");
+					System.out.print(p.getState() + "\t");
 				}
 				System.out.println();
 			}

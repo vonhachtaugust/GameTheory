@@ -31,6 +31,7 @@ public class ReproductionStep {
 
 				// Best strategy so far
 				int bestStrat = p.getState();
+				double bestScore = p.getScore();
 
 				// Place the neighbours, Player objects, in a list
 				ArrayList<Player> neighbours = new ArrayList<Player>();
@@ -56,12 +57,18 @@ public class ReproductionStep {
 				neighbours.add(leftPlayer);
 
 				// Check for highest score and update bestStrat
+				System.out.println("Updating player " + i + ":" + j + " with strat " + bestStrat + " with score " + bestScore);
 				for (int n = 0; n < neighbours.size(); n++) {
 					Player thisPlayer = neighbours.get(n);
-					if (thisPlayer.getScore() > myScore) {
+					System.out.println("Comparing with " + thisPlayer.getState() + " with score " + thisPlayer.getScore());;
+					if (thisPlayer.getScore() > bestScore) {
+						System.out.println("was better, updating");
 						bestStrat = thisPlayer.getState();
+						bestScore = thisPlayer.getScore();
 					}
+					System.out.println();
 				}
+				System.out.println("RESULT: bestStrat " + bestStrat + " with score " + bestScore);
 
 				Player newP = (Player) newLattice[i][j];
 				newP.setState(bestStrat);
