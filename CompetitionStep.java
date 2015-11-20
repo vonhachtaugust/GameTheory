@@ -66,7 +66,7 @@ public class CompetitionStep {
 				p.setScore(scores[i][j]);
 				// System.out.println(p.getScore() + " ");
 			}
-			System.out.println();
+			// System.out.println();
 		}
 	}
 

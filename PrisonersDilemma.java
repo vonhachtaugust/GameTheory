@@ -15,11 +15,14 @@ public class PrisonersDilemma extends JFrame {
 	final int width = 400; // Size of paint area
 	final int height = 400;
 	final int N = 1;
-	public static final int row = 2;
-	public static final int col = 2;
+	public static final int row = 4;
+	public static final int col = 5;
+	public static final double mutrate = 0.01;
 
 	public Grid grid = new Grid(row, col);
-	public CompetitionStep step = new CompetitionStep(row, col, N);
+	public CompetitionStep step1 = new CompetitionStep(row, col, N);
+	public ReproductionStep step2 = new ReproductionStep(mutrate);
+
 	public Random rand = new Random();
 
 	public static void main(String[] args) {
@@ -31,35 +34,33 @@ public class PrisonersDilemma extends JFrame {
 		// Initialise
 		Object[][] lattice = grid.getPlayers();
 
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				Player p = (Player) lattice[i][j];
-				System.out.print(p.getScore() + " ");
-			}
+		for (int z = 0; z < 20; z++) {
+			// Competitions step
 			System.out.println();
-		}
+			System.out.println("Competition: ");
+			step1.updatescores(step1.getScores(grid), grid);
 
-		// Competitions step
-		step.updatescores(step.getScores(grid), grid);
-
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				Player p = (Player) lattice[i][j];
-				p.setState(rand.nextInt(8));
-				System.out.print(p.getScore() + " ");
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
+					Player p = (Player) lattice[i][j];
+					System.out.print(p.getState() + "[" + p.getScore() + "]\t");
+				}
+				System.out.println();
 			}
+
 			System.out.println();
-		}
+			System.out.println("Reproduction: ");
 
-		// Reproduction step
-		step.updatescores(step.getScores(grid), grid);
+			// Reproduction step
+			step2.getReproduction(grid);
 
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
-				Player p = (Player) lattice[i][j];
-				System.out.print(p.getScore() + " ");
+			for (int i = 0; i < row; i++) {
+				for (int j = 0; j < col; j++) {
+					Player p = (Player) lattice[i][j];
+					System.out.print(p.getState() + "[" + p.getScore() + "]\t");
+				}
+				System.out.println();
 			}
-			System.out.println();
 		}
 
 		// initGraphics();
