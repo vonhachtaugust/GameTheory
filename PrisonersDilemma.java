@@ -84,7 +84,12 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	private Color getStateColor(int s) {
 		int rgb = 255 - 30 * (s + 1);
-		Color c = new Color(rgb, rgb, rgb);
+		Color c;
+		if (s == 7) {
+			c = new Color(0, 0, 255);
+		} else (s > 0 && s < 7) {
+			c = new Color(rgb, rgb, rgb);
+		}
 		return c;
 	}
 
