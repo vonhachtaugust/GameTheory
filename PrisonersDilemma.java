@@ -2,6 +2,7 @@ package homeproblem2;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,8 +20,8 @@ import javax.swing.border.Border;
 
 public class PrisonersDilemma extends JPanel implements ActionListener {
 
-	final int width = 400; // Size of paint area
-	final int height = 400;
+	final int width = 640; // Size of paint area
+	final int height = 640;
 	final int N = 7;
 	public static final int row = 32;
 	public static final int col = 32;
@@ -29,6 +30,7 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	public Grid grid = new Grid(row, col);
 	public CompetitionStep step1 = new CompetitionStep(row, col, N);
 	public ReproductionStep step2 = new ReproductionStep(mutrate, row, col, N);
+	public Object[][] lattice;
 
 	public Random rand = new Random();
 
@@ -39,8 +41,9 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	void program() {
 
 		// Initialise
-		Object[][] lattice = grid.getPlayers();
-
+		lattice = grid.getPlayers();
+		initEvent();
+		initGraphics();
 		/*
 		 * for (int z = 0; z < 100; z++) { // Competitions step
 		 * System.out.println(); System.out.println("Competition: ");
@@ -59,17 +62,38 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 		 * "\t"); } System.out.println(); } }
 		 */
 
-		initEvent();
-		initGraphics();
-
 	}
 
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) lattice[i][j];
+				int color = p.getState();
+
+				g.setColor(new Color(128, 128, 128));
+				g.fillRect(getPlayerPosX(p, width / col), getPlayerPosY(p, height / row), height / row, height / row);
+			}
+		}
+
 		// repaint();
 
+	}
+
+	private Color getStateColor(int s) {
+		int rgb = 255 - 30 * (s + 1);
+		Color c = new Color(rgb, rgb, rgb);
+		return c;
+	}
+
+	private int getPlayerPosX(Player p, int cellWidth) {
+		return (p.getCol()) * cellWidth;
+	}
+
+	private int getPlayerPosY(Player p, int cellHeight) {
+		return (p.getRow()) * cellHeight;
 	}
 
 	void initGraphics() {
@@ -124,19 +148,6 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	private void initEvent() {
 		t.setInitialDelay(500);
-	}
-	
-	private int getPlayerPosX(Player p, int cellWidth) {
-		return (p.getCol() - 1) * cellWidth;
-	}
-	private int getPlayerPosY(Player p, int cellHeight) {
-		return (p.getRow() - 1) * cellHeight;
-	}
-	
-	private Color getStateColor(int s) {
-		int rgb = 255 - 30 * (s + 1);
-		Color c = new Color(rgb,rgb,rgb);
-		return c;
 	}
 
 }
