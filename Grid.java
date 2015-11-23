@@ -1,5 +1,7 @@
 package homeproblem2;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Grid {
@@ -8,6 +10,7 @@ public class Grid {
 	final int col;
 	public static Random rand = new Random();
 	private static Object[][] grid;
+	private int[] countStateList = new int[8];
 
 	public Grid(int row, int col) {
 		this.row = row;
@@ -23,18 +26,40 @@ public class Grid {
 				k = rand.nextInt(8);
 				Player p = new Player(i, j, 0, k);
 				grid[i][j] = p;
-				// System.out.println(p);
 			}
 		}
 		return grid;
 	}
 
 	public Object[][] getPlayers() {
-		/*
-		 * for (int i = 0; i < row; i++) { for (int j = 0; j < col; j++) {
-		 * System.out.print(grid[i][j] + " "); } System.out.println(); }
-		 */
 		return grid;
+	}
+
+	public int[] count() {
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				Player p = (Player) grid[i][j];
+				countStateList[p.getState()]++;
+			}
+		}
+		return countStateList;
+	}
+
+	public void Clear() {
+		for (int i = 0; i < countStateList.length; i++) {
+			countStateList[i] = 0;
+		}
+	}
+
+	public void addToDataset(int[] stateList, int timeStep) {
+		XYLineChart.S_0.add((double) stateList[0]);
+		XYLineChart.S_1.add((double) stateList[1]);
+		XYLineChart.S_2.add((double) stateList[2]);
+		XYLineChart.S_3.add((double) stateList[3]);
+		XYLineChart.S_4.add((double) stateList[4]);
+		XYLineChart.S_5.add((double) stateList[5]);
+		XYLineChart.S_6.add((double) stateList[6]);
+		XYLineChart.S_7.add((double) stateList[7]);
 	}
 
 	public int getRow() {

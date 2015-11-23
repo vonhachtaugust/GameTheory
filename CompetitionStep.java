@@ -30,7 +30,6 @@ public class CompetitionStep {
 
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-
 				Player p = (Player) lattice[i][j];
 
 				int up = grid.getIndAbove(i);
@@ -38,21 +37,9 @@ public class CompetitionStep {
 				int right = grid.getIndRightOf(j);
 				int left = grid.getIndLeftOf(j);
 
-				/*
-				 * int up = i - 1; int down = i + 1; int right = j + 1; int left
-				 * = j - 1;
-				 * 
-				 * if (up < 0) { up = row - 1; } if (down > row - 1) { down = 0;
-				 * } if (right > col - 1) { right = 0; } if (left < 0) { left =
-				 * col - 1; }
-				 */
-
 				score[i][j] = (game(p, (Player) lattice[up][j], N) + game(p, (Player) lattice[down][j], N)
 						+ game(p, (Player) lattice[i][right], N) + game(p, (Player) lattice[i][left], N));
-				// System.out.print("(" + score[i][j] + ")" + " ");
-				// System.out.println(p.getScore() + " ");
 			}
-			// System.out.println();
 		}
 		return score;
 	}
@@ -64,9 +51,7 @@ public class CompetitionStep {
 			for (int j = 0; j < col; j++) {
 				Player p = (Player) lattice[i][j];
 				p.setScore(scores[i][j]);
-				// System.out.println(p.getScore() + " ");
 			}
-			// System.out.println();
 		}
 	}
 
