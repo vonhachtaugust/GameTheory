@@ -132,5 +132,11 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	private int getPlayerPosY(Player p, int cellHeight) {
 		return (p.getRow() - 1) * cellHeight;
 	}
+	
+	private Color getStateColor(int s) {
+		int rgb = 255 - 30 * (s + 1);
+		Color c = new Color(rgb,rgb,rgb);
+		return c;
+	}
 
 }
