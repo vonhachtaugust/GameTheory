@@ -71,13 +71,13 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
 				Player p = (Player) lattice[i][j];
-				int color = p.getState();
-
-				g.setColor(new Color(128, 128, 128));
+				g.setColor(getStateColor(p.getState()));
 				g.fillRect(getPlayerPosX(p, width / col), getPlayerPosY(p, height / row), height / row, height / row);
 			}
 		}
 
+		step1.updatescores(step1.getScores(grid), grid);
+		step2.getReproduction(grid);
 		// repaint();
 
 	}
@@ -144,7 +144,7 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	JButton a = new JButton("Start");
 	JButton b = new JButton("Stop");
-	Timer t = new Timer(500, this);
+	Timer t = new Timer(100, this);
 
 	private void initEvent() {
 		t.setInitialDelay(500);
