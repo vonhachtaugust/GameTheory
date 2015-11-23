@@ -125,5 +125,12 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	private void initEvent() {
 		t.setInitialDelay(500);
 	}
+	
+	private int getPlayerPosX(Player p, int cellWidth) {
+		return (p.getCol() - 1) * cellWidth;
+	}
+	private int getPlayerPosY(Player p, int cellHeight) {
+		return (p.getRow() - 1) * cellHeight;
+	}
 
 }
