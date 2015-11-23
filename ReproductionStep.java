@@ -1,18 +1,19 @@
 package homeproblem2;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ReproductionStep {
 
 	public Grid newGrid;
 	private double mutrate;
 	private int N;
-<<<<<<< Updated upstream
 	private int row;
 	private int col;
 
 	private ArrayList<Player> neighbours = new ArrayList<Player>();
 	private Integer[][] updateLattice;
+	private Random rand = new Random();
 
 	public ReproductionStep(double mutrate, int row, int col, int N) {
 		this.mutrate = mutrate;
@@ -20,13 +21,7 @@ public class ReproductionStep {
 		this.col = col;
 		this.N = N;
 		updateLattice = new Integer[row][col];
-=======
-	private Random rand = new Random();
 
-	public ReproductionStep(double mutrate,int N) {
-		this.mutrate = mutrate;
-		this.N = N;
->>>>>>> Stashed changes
 	}
 
 	public Grid getReproduction(Grid grid) {
@@ -105,15 +100,15 @@ public class ReproductionStep {
 					}
 					// System.out.println();
 				}
-				
+
 				// System.out.println("RESULT: bestStrat " + bestStrat + " with
 				// score " + bestScore);
-				
+
 				// Mutation
 				if (Math.random() < mutrate) {
-					bestStrat = rand.nextInt(N);
+					bestStrat = rand.nextInt(N + 1);
 				}
-				
+
 				updateLattice[i][j] = bestStrat;
 				// Player newP = (Player) newLattice[i][j];
 				// newP.setState(bestStrat); Cannot change state inside the
