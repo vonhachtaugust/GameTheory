@@ -25,6 +25,8 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	final int width = 640;
 	final int height = 640;
 	final int N = 7;
+	final double T = 0;
+	final double P = 0;
 	public int timeStep = 0;
 
 	public static final int row = 32;
@@ -32,7 +34,7 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	public static final double mutrate = 1 / (row ^ 2);
 
 	public Grid grid = new Grid(row, col);
-	public CompetitionStep step1 = new CompetitionStep(row, col, N);
+	public CompetitionStep step1 = new CompetitionStep(row, col, N, T, P);
 	public ReproductionStep step2 = new ReproductionStep(mutrate, row, col, N);
 	public Object[][] lattice;
 
@@ -63,13 +65,16 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 		step2.getReproduction(grid);
 
 		int[] check = grid.count();
-		grid.addToDataset(check, timeStep);
-		grid.Clear();
+		grid.addToDataset(check);
 
-		if (timeStep > 103) {
+		if (timeStep > 53) {
 			t.stop();
 			new XYLineChart(row * col);
+			for (int k = 0; k < check.length; k++) {
+				System.out.println("Antal state:" + k + "=" + check[k]);
+			}
 		}
+		grid.Clear();
 	}
 
 	public Color getStateColor(int s) {
@@ -116,9 +121,9 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == t) {
-			System.out.println("Timer");
-		}
+		/*
+		 * if (e.getSource() == t) { System.out.println("Timer"); }
+		 */
 
 		if (e.getSource() == a) {
 			System.out.println("Go");
@@ -135,7 +140,7 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	JButton a = new JButton("Start");
 	JButton b = new JButton("Stop");
-	Timer t = new Timer(100, this);
+	Timer t = new Timer(50, this);
 
 	private void initEvent() {
 		t.setInitialDelay(500);

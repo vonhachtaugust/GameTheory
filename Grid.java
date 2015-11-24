@@ -51,7 +51,7 @@ public class Grid {
 		}
 	}
 
-	public void addToDataset(int[] stateList, int timeStep) {
+	public void addToDataset(int[] stateList) {
 		XYLineChart.S_0.add((double) stateList[0]);
 		XYLineChart.S_1.add((double) stateList[1]);
 		XYLineChart.S_2.add((double) stateList[2]);

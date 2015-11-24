@@ -7,14 +7,16 @@ public class CompetitionStep {
 	private static int col;
 	public static Double[][] score;
 
-	public static double T = 1.5;
-	public static double R = 1;
-	public static double P = 0.5;
-	public static double S = 0;
+	private static double T;
+	private static double R = 1;
+	private static double P;
+	private static double S = 0;
 
-	public CompetitionStep(int row, int col, int N) {
+	public CompetitionStep(int row, int col, int N, double T, double P) {
 		this.row = row;
 		this.col = col;
+		this.T = T;
+		this.P = P;
 		this.N = N;
 		score = new Double[row][col];
 	}
