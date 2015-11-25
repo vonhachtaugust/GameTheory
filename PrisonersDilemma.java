@@ -25,8 +25,9 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	final int width = 640;
 	final int height = 640;
 	final int N = 7;
-	final double T = 0;
-	final double P = 0;
+	final double T = 1.5;
+	final double P = 0.1;
+	final int timesteps = 1003;
 	public int timeStep = 0;
 
 	public static final int row = 32;
@@ -67,12 +68,9 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 		int[] check = grid.count();
 		grid.addToDataset(check);
 
-		if (timeStep > 53) {
+		if (timeStep > timesteps) {
 			t.stop();
 			new XYLineChart(row * col);
-			for (int k = 0; k < check.length; k++) {
-				System.out.println("Antal state:" + k + "=" + check[k]);
-			}
 		}
 		grid.Clear();
 	}
@@ -140,7 +138,7 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 
 	JButton a = new JButton("Start");
 	JButton b = new JButton("Stop");
-	Timer t = new Timer(50, this);
+	Timer t = new Timer(10, this);
 
 	private void initEvent() {
 		t.setInitialDelay(500);
