@@ -26,8 +26,8 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	final int height = 640;
 	final int N = 7;
 	final double T = 1.5;
-	final double P = 0.1;
-	final int timesteps = 1003;
+	final double P = 0.5;
+	final int timesteps = 200;
 	public int timeStep = 0;
 
 	public static final int row = 32;

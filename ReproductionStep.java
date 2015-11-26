@@ -82,6 +82,12 @@ public class ReproductionStep {
 					if (thisPlayer.getScore() > bestScore) {
 						bestStrat = thisPlayer.getState();
 						bestScore = thisPlayer.getScore();
+					} else if (thisPlayer.getScore() == bestScore) { // break_ties_randomly
+						Double r = Math.random();
+						if (r > 0.5) {
+							bestStrat = thisPlayer.getState();
+							bestScore = thisPlayer.getScore();
+						}
 					}
 				}
 

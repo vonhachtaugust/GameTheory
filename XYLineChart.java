@@ -56,9 +56,9 @@ public class XYLineChart extends JFrame {
 
 	private JPanel createChartPanel() {
 
-		String chartTitle = "Prisoners Dilemma";
+		String chartTitle = "Seven round prisoner's dilemma";
 		String xAxisLabel = "Time";
-		String yAxisLabel = "Population density";
+		String yAxisLabel = "Population fraction";
 
 		XYDataset dataset = createDataset();
 		JFreeChart chart = ChartFactory.createXYLineChart(chartTitle, xAxisLabel, yAxisLabel, dataset);

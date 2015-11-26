@@ -27,12 +27,9 @@ public class PhaseDiagram extends JPanel {
 	private static final int width = 400;
 	private static final int height = 400;
 	private static final int N = 7;
-	private static final int interiorpoints = 20;
-	private static final int timeSteps = 1000;
-	private static final int nrOfAverage = 10;
-
-	private static int timeStep = 0;
-
+	private static final int interiorpoints = width;
+	private static final int timeSteps = 250;
+	private static final int nrOfAverage = 3;
 	private static List<Double> average = new ArrayList<>();
 	private static DecimalFormat df = new DecimalFormat("0.0##");
 
@@ -58,19 +55,21 @@ public class PhaseDiagram extends JPanel {
 			int y0 = getPosY(i - 1);
 			int x1 = (int) BORDER_GAP / 2 - HATCH;
 			int y1 = getPosY(i - 1);
-			g2.drawLine(x0, y0, x1, y1);
 
-			if (i % 2 == 0) {
+			if (i % (int) (interiorpoints / 10) == 0) {
 				String yLabel = df.format((double) i / interiorpoints) + "";
 				FontMetrics metric = g2.getFontMetrics();
 				int labelWidth = metric.stringWidth(yLabel);
-				g2.drawString(yLabel, x0 - labelWidth - 10, y0 + (metric.getHeight() / 2) - 3);
+				g2.drawString(yLabel, x0 - labelWidth - 15, y0 + (metric.getHeight() / 2) - 3);
+				g2.drawLine(x0, y0, x1 - HATCH, y1);
+			} else {
+				g2.drawLine(x0, y0, x1, y1);
 			}
 			if (i == interiorpoints / 2) {
 				String unit = "P";
 				FontMetrics units = g2.getFontMetrics();
 				int labelWidth = units.stringWidth(unit);
-				g2.drawString(unit, x0 - labelWidth - 35, y0 + (units.getHeight() / 2) - 3);
+				g2.drawString(unit, x0 - labelWidth - 40, y0 + (units.getHeight() / 2) - 3);
 			}
 		}
 
@@ -80,19 +79,21 @@ public class PhaseDiagram extends JPanel {
 			int y0 = (int) BORDER_GAP / 2 + height;
 			int x1 = getPosX(i);
 			int y1 = (int) BORDER_GAP / 2 + HATCH + height;
-			g2.drawLine(x0, y0, x1, y1);
 
-			if (i % 2 == 0) {
+			if (i % (int) (interiorpoints / 10) == 0) {
 				String yLabel = df.format((double) i / interiorpoints + (double) 1) + "";
 				FontMetrics metric = g2.getFontMetrics();
 				int labelWidth = metric.stringWidth(yLabel);
-				g2.drawString(yLabel, x0 - (metric.getHeight() / 2), y0 + labelWidth);
+				g2.drawString(yLabel, x0 - (metric.getHeight() / 2), y0 + labelWidth + 5);
+				g2.drawLine(x0, y0, x1, y1 + HATCH);
+			} else {
+				g2.drawLine(x0, y0, x1, y1);
 			}
 			if (i == interiorpoints / 2) {
 				String unit = "T";
 				FontMetrics units = g2.getFontMetrics();
 				int labelWidth = units.stringWidth(unit);
-				g2.drawString(unit, x0 - (units.getHeight() / 2), y0 + 40);
+				g2.drawString(unit, x0 - (units.getHeight() / 2), y0 + 45);
 			}
 		}
 
@@ -100,8 +101,9 @@ public class PhaseDiagram extends JPanel {
 			for (int j = 0; j < interiorpoints; j++) {
 				g.setColor(getStateColor(points[i][j]));
 				g.fillRect(getPosX(i), getPosY(j), getRectSizeX(), getRectSizeY());
-				g.setColor(Color.BLACK);
-				g.drawRect(getPosX(i), getPosY(j), getRectSizeX(), getRectSizeY());
+				// g.setColor(Color.BLACK);
+				// g.drawRect(getPosX(i), getPosY(j), getRectSizeX(),
+				// getRectSizeY());
 			}
 		}
 
@@ -168,6 +170,7 @@ public class PhaseDiagram extends JPanel {
 		double Pstep = 1 / stepLengthP;
 
 		for (int i = 0; i < Tstep; i++) {
+			System.out.println(1 + i * stepLengthT);
 			for (int j = 0; j < Pstep; j++) {
 				int[] occur = new int[8];
 				for (int n = 0; n < nrOfAverage; n++) {
