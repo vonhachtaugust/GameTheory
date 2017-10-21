@@ -1,4 +1,4 @@
-package homeproblem2;
+package GameTheory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,16 +51,16 @@ public class Grid {
 		}
 	}
 
-	public void addToDataset(int[] stateList) {
-		XYLineChart.S_0.add((double) stateList[0]);
-		XYLineChart.S_1.add((double) stateList[1]);
-		XYLineChart.S_2.add((double) stateList[2]);
-		XYLineChart.S_3.add((double) stateList[3]);
-		XYLineChart.S_4.add((double) stateList[4]);
-		XYLineChart.S_5.add((double) stateList[5]);
-		XYLineChart.S_6.add((double) stateList[6]);
-		XYLineChart.S_7.add((double) stateList[7]);
-	}
+    //public void addToDataset(int[] stateList) {
+		//XYLineChart.S_0.add((double) stateList[0]);
+		//XYLineChart.S_1.add((double) stateList[1]);
+		//XYLineChart.S_2.add((double) stateList[2]);
+		//XYLineChart.S_3.add((double) stateList[3]);
+		//XYLineChart.S_4.add((double) stateList[4]);
+		//XYLineChart.S_5.add((double) stateList[5]);
+		//XYLineChart.S_6.add((double) stateList[6]);
+		//XYLineChart.S_7.add((double) stateList[7]);
+    //}
 
 	public int getRow() {
 		return row;

@@ -1,4 +1,4 @@
-package homeproblem2;
+package GameTheory;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -18,7 +18,9 @@ import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
-import homeproblem2.XYLineChart;
+import java.lang.Thread;
+
+//import GameTheory.XYLineChart;
 
 public class PrisonersDilemma extends JPanel implements ActionListener {
 
@@ -40,6 +42,11 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	public Object[][] lattice;
 
 	public Random rand = new Random();
+
+  JButton a = new JButton("Start");
+  JButton b = new JButton("Stop");
+  Timer t = new Timer(10, this);
+
 
 	public static void main(String[] args) {
 		new PrisonersDilemma().program();
@@ -65,14 +72,19 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 		step1.updatescores(step1.getScores(grid), grid);
 		step2.getReproduction(grid);
 
-		int[] check = grid.count();
-		grid.addToDataset(check);
+		//int[] check = grid.count();
+		//grid.addToDataset(check);
 
 		if (timeStep > timesteps) {
 			t.stop();
-			new XYLineChart(row * col);
+			//new XYLineChart(row * col);
 		}
 		grid.Clear();
+    try {
+        Thread.sleep(100);
+    } catch (InterruptedException e) {
+        System.err.println("Caught InterruptedException: " + e.getMessage());
+    }
 	}
 
 	public Color getStateColor(int s) {
@@ -97,32 +109,23 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 	void initGraphics() {
 
 		setPreferredSize(new Dimension(width, height));
-		JFrame window = new JFrame("Title");
+		JFrame window = new JFrame("PrisonersDilemma");
 		window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		window.setLayout(new BorderLayout());
 		window.add(this, BorderLayout.CENTER);
-		window.pack();
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
-
 		JPanel p = new JPanel();
-
 		a.addActionListener(this);
 		p.add(a);
-
 		b.addActionListener(this);
 		p.add(b);
-
 		window.add(p, BorderLayout.SOUTH);
 
+    window.pack();
+		window.setLocationRelativeTo(null);
+		window.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		/*
-		 * if (e.getSource() == t) { System.out.println("Timer"); }
-		 */
-
 		if (e.getSource() == a) {
 			System.out.println("Go");
 			t.start();
@@ -132,16 +135,10 @@ public class PrisonersDilemma extends JPanel implements ActionListener {
 			System.out.println("Stop");
 			t.stop();
 		}
-
 		repaint();
 	}
-
-	JButton a = new JButton("Start");
-	JButton b = new JButton("Stop");
-	Timer t = new Timer(10, this);
 
 	private void initEvent() {
 		t.setInitialDelay(500);
 	}
-
 }

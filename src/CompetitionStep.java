@@ -1,4 +1,4 @@
-package homeproblem2;
+package GameTheory;
 
 public class CompetitionStep {
 

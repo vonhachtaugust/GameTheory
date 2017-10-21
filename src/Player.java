@@ -1,18 +1,16 @@
-package homeproblem2;
+package GameTheory;
 
 public class Player {
-	
 	private int row;
 	private int col;
 	private double score;
 	private int state;
-	
+
 	public Player(int row,int col, double score, int state) {
 		this.setRow(row);
 		this.setCol(col);
 		this.setScore(score);
 		this.setState(state);
-			
 	}
 
 	public int getCol() {
@@ -38,7 +36,6 @@ public class Player {
 	public void setScore(double score) {
 		this.score = score;
 	}
-	
 	public int getState() {
 		return state;
 	}
@@ -46,7 +43,6 @@ public class Player {
 	public void setState(int state) {
 		this.state = state;
 	}
-	
     //@Override
     public String toString() {
         return "Player{" +
@@ -57,6 +53,4 @@ public class Player {
                 ", state=" + state +
                 '}';
     }
-	
-
 }

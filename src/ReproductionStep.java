@@ -1,4 +1,4 @@
-package homeproblem2;
+package GameTheory;
 
 import java.util.ArrayList;
 import java.util.Random;
