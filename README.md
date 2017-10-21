@@ -6,7 +6,7 @@ Using a simple java simulation we study a model of cooperative games.
 
 The phase diagram obtained by simulating the dynamics for various [P, T] pairs (400 x 400 to be exact) stopping at the 250th time step.
 
-<img src="https://github.com/vonhachtaugust/GameTheory/blob/master/PhaseDiagram.png" width="640" height="640">
+<img src="https://github.com/vonhachtaugust/GameTheory/blob/master/PhaseDiagram.png" width="480" height="480">
 
 ## Getting Started
 
