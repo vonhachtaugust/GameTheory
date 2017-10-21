@@ -1,4 +1,4 @@
-# When to cooperate or when to not cooperate?
+# When to cooperate or when to not?
 
 Using a simple java simulation we study a model of cooperative games.
 
