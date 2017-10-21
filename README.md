@@ -4,7 +4,7 @@ Using a simple java simulation we study a model of cooperative games.
 
 ![alt text](https://github.com/vonhachtaugust/GameTheory/blob/master/GameTheory.png)
 
-The phase diagram obtained by simulating the dynamics for various [P, T] pairs (400 x 400 to be exact) stopping at the 250th time step.
+The phase diagram obtained by simulating the dynamics for various [P, T] pairs (400 x 400 to be exact) stopping at the 250th time step and plotting the strategy having the largest population fraction.
 
 <img src="https://github.com/vonhachtaugust/GameTheory/blob/master/PhaseDiagram.png" width="480" height="480">
 
